@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Guitar Inventory</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Guitar Inventory</h1>
+        <div class="row">
+            <% images.forEach(element => { %>
+            <div class="col s12 m3">
+                <div class="card blue-grey darken-1">
+                    <div class="card-image">
+                        <a href="/images/<%= element.idx %>">
+                            <img class="materialboxed" width="300px" src="/<%= element.img %>.jpg" alt="<%= element.idx%>">
+                        </a>
+                    </div>
+                </div>
+            </div> 
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>
