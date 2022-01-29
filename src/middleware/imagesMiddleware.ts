@@ -1,7 +1,7 @@
 import Express from 'express';
 import path from 'path';
 import fsp from 'fs/promises';
-import { sharpResize, convertToBuffer } from '../utils/common';
+import { sharpResize, convertToBuffer, saveImageToThumbs } from '../utils/common';
 
 export const imagesPath = path.resolve(process.cwd(), 'uploads', 'full');
 export const thumbnailsPath = path.resolve(process.cwd(), 'uploads', 'thumbs');
@@ -56,14 +56,10 @@ const checkForParams = async (
       const image = await convertToBuffer(thumbImage);
       res.end(image);
     }).catch(async (e) => {
-      // if( !req.query.width || !req.query.height || isNaN((req.query.height as unknown) as number) || isNaN((req.query.width as unknown) as number) ) {
-      //   res.end("you need to speicify Valid dimensions");
-      // }
       try {
+        await saveImageToThumbs(path.resolve(imagesPath, req.query.filename as string + ".jpg"), req.query.width as string, req.query.height as string, thumbImage);
         const resizedImg = await sharpResize(path.resolve(imagesPath, req.query.filename as string + ".jpg"), req.query.width as string, req.query.height as string);
-        const browseImg = await resizedImg.toBuffer();
-        await resizedImg.toFile(thumbImage);
-        res.end(browseImg);
+        res.end(resizedImg);
       } catch (error) {
         res.end("you need to specify valid dimensions and choose image to perform resize opertion on")
       }
