@@ -56,7 +56,7 @@ const checkForParams = async (
       const image = await convertToBuffer(thumbImage);
       res.end(image);
     }).catch(async (e) => {
-      const resizedImg = await sharpResize(path.resolve(imagesPath, req.query.filename as string), req.query.width as string, req.query.height as string);
+      const resizedImg = await sharpResize(path.resolve(imagesPath, req.query.filename as string + ".jpg"), req.query.width as string, req.query.height as string);
       const browseImg = await resizedImg.toBuffer();
       await resizedImg.toFile(thumbImage);
       res.end(browseImg);
