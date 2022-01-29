@@ -27,8 +27,12 @@ routes.get('/upload_image', (req: Request, res: Response)=>{
 });
 
 routes.get('/:idx', (req, res) => {
-  const singleImg = res.locals.someimgs[parseInt(req.params.idx)];
-  res.render('single_image', {singleImg});
+  if (req.params.idx < res.locals.someimgs.length) {
+    const singleImg = res.locals.someimgs[parseInt(req.params.idx)];
+    res.render('single_image', {singleImg});
+  } else {
+    res.render("error");
+  }
 });
 
 routes.post('/upload_image', upload.single('imageUrl'), (req: Request, res: Response)=>{

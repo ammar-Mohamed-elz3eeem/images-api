@@ -20,12 +20,12 @@ const initImages = async (req: Express.Request, res: Express.Response, next: Exp
         let imgName = img.slice(0,img.lastIndexOf('.'));
         images.push({img: imgName,idx});
       });
+      res.locals.someimgs = images;
+      next();
     }
   } catch (error) {
-    throw new Error('No Images Found');
+    res.end("No Images Found in the full folder")
   }
-  res.locals.someimgs = images;
-  next();
 };
 
 // const saveImgToThumbs = (
