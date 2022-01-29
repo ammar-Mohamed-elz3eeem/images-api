@@ -16,7 +16,7 @@ app.set('views', path.join(process.cwd(), 'views'));
 app.use(initImages);
 
 app.get('/', (req: Request, res: Response): void => {
-  res.send('Welcome to the home page!');
+  res.render("index")
 });
 
 app.use('/images', routes);
