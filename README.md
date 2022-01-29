@@ -14,7 +14,7 @@ To be able to work with the project so you need to run some commands in your PC 
 
 2. add your own images to the project in the folder src/uploads/full
 
-3. in your browser enter the url localhost:3000/images/filename=<IMAGE_NAME>&width=<NEW_WIDTH_YOU_WANT>&height=<NEW_HEIGHT_YOU_WANT>
+3. in your browser enter the url localhost:3000/images?filename=<IMAGE_NAME>&width=<NEW_WIDTH_YOU_WANT>&height=<NEW_HEIGHT_YOU_WANT>
 
 ## Technologoies used in the project
 

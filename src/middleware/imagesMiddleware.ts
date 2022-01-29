@@ -56,10 +56,17 @@ const checkForParams = async (
       const image = await convertToBuffer(thumbImage);
       res.end(image);
     }).catch(async (e) => {
-      const resizedImg = await sharpResize(path.resolve(imagesPath, req.query.filename as string + ".jpg"), req.query.width as string, req.query.height as string);
-      const browseImg = await resizedImg.toBuffer();
-      await resizedImg.toFile(thumbImage);
-      res.end(browseImg);
+      // if( !req.query.width || !req.query.height || isNaN((req.query.height as unknown) as number) || isNaN((req.query.width as unknown) as number) ) {
+      //   res.end("you need to speicify Valid dimensions");
+      // }
+      try {
+        const resizedImg = await sharpResize(path.resolve(imagesPath, req.query.filename as string + ".jpg"), req.query.width as string, req.query.height as string);
+        const browseImg = await resizedImg.toBuffer();
+        await resizedImg.toFile(thumbImage);
+        res.end(browseImg);
+      } catch (error) {
+        res.end("you need to specify valid dimensions and choose image to perform resize opertion on")
+      }
     });
   } else {
     res.render('images', {images: res.locals.someimgs});
